@@ -11,7 +11,7 @@ if not (os.path.isdir(sys.argv[1])):
 
 allowed = [".avi", ".flv", ".mkv", ".mov", ".mp4", ".mpg", ".mpeg"]
 
-pathdir = os.path.dirname(sys.argv[1])
+pathdir = os.path.abspath(sys.argv[1])
 files = [f for f in os.listdir(pathdir) if not f.startswith('.')]
 ext = files[0].split(".")[::-1][0]
 
@@ -54,4 +54,5 @@ for f in files:
         pathindex = pindex.group(0).upper()
         pathseason = re.search(r"(?<=[sS])[0-9]+", f).group(0)
     newname = str(pathdir) + "/" + str(sname) + "." + str(pathindex) + "." + assoc[pathindex].replace(" ", ".") + "." + ext
+    print(f"{os.path.basename(f)} --> {os.path.basename(newname)}")
     os.rename(f, newname)
